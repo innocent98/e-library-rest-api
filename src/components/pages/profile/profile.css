@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.profile-h {
+  background-color: #f5fffa;
+  padding-bottom: 50px;
+  height: 100vh;
+}
+
+.head-pr {
+  border-bottom: 1px solid #000;
+}
+
+.top-pr {
+  padding-top: 12px;
+  margin-right: 16%;
+  margin-left: 20%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon {
+  position: relative;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.heading-pr {
+  background-color: #3D3C3A;
+  height: 130px;
+  border-bottom: 1px solid gray;
+}
+
+.cover-pic-pr {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+  padding: 10px 30px;
+  top: 5%;
+}
+
+.cover-pic-pr img {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.head-title{
+    margin-left: 20px;
+    margin-top: 0;
+    line-height: 1px;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+    color: #ffff;
+}
+
+.head-main-t{
+    padding-top: 10px;
+}
+
+.title-hr h3{
+    font-weight: 500;
+}
+
+.mail-hr > p{
+    font-size: 12px;
+}
+
+.sub-title-hr{
+    margin-top: 25px;
+    line-height: 1px;
+    position: relative;
+    justify-content: left;
+    text-align: left;
+    color: #ffff;
+}
+
+.published-count > h5{
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.book-published > p{
+    font-size: 10px;
+}
+
+.details{
+    padding: 20px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+}
+

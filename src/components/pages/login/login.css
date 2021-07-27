@@ -1,0 +1,95 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+
+.head-l {
+  background-color: #f5fffa;
+  height: 100vh;
+  padding-top: 8%;
+}
+
+.container-md {
+  height: 100px;
+  position: relative;
+  top: 0;
+  padding-left: 30%;
+  justify-content: center ;
+}
+.logo {
+  padding: 10px 10px;
+  align-items: center ;
+  justify-content: center ;
+  position: relative;
+  cursor: pointer;
+}
+
+.lib-lg {
+  width: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.txt-lg {
+  font-size: 1.5rem;
+  margin-left: 8px;
+  color: #837E7C;
+}
+
+.container{
+    background-color: #fff;
+    width: 60%;
+    height: auto;
+    margin-top: 0;
+}
+
+.login{
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 20px;
+    color: #6666cc;
+}
+
+.container .row{
+  padding: 25px 5px;
+  margin-top: -50px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
+
+.l-sp {
+    cursor: pointer;
+    position: relative;
+    width: 20px;
+    margin-top: -10%;
+    left: 80%;
+  }
+
+.btn-n{
+    padding: 5px 30px;
+    font-size: 1.2em;
+    border: transparent;
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.member{
+  margin-top: 1%;
+  position: relative;
+  left: 0 !important;
+}
+
+.member-r a{
+  color: green;
+  text-decoration: none;
+}
+
+.btnn:hover{
+    transition: 1.0s ease-in;
+}

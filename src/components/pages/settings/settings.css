@@ -1,0 +1,56 @@
+.settings-h {
+  background-color: #f5fffa;
+  padding-bottom: 50px;
+  height: 100vh;
+}
+
+.head-s {
+  border-bottom: 1px solid #000;
+}
+
+.top-s {
+  padding-top: 12px;
+  margin-right: 16%;
+  margin-left: 20%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon {
+  position: relative;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.icon a{
+  text-decoration: none;
+  color: #000;
+}
+
+.dashboard-s {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.settings-wrapper{
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.settings-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 20px;
+  border-bottom: 1px solid gray;
+}
+
+.title{
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
