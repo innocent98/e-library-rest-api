@@ -67,16 +67,20 @@
     cursor: pointer;
     position: relative;
     width: 20px;
-    margin-top: -10%;
     left: 80%;
   }
 
-.btn-n{
+.login-button{
     padding: 5px 30px;
     font-size: 1.2em;
     border: transparent;
     border-radius: 15px;
     font-family: 'Roboto', sans-serif;
+}
+
+.login-button:disabled{
+  cursor: not-allowed;
+  background-color: cornflowerblue;
 }
 
 .member{

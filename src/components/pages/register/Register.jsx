@@ -4,11 +4,37 @@ import hidePwdImg from "./assets/hidepd.svg";
 import PhoneInput from "react-phone-number-input";
 import "./register.css";
 import logo from "./assets/lg.png";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Register() {
-  const [pwd, setPwd] = useState("");
   const [isRevealPwd, setIsRevealPwd] = useState(false);
-  const [value, setValue] = useState();
+  // const [value, setValue] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(false);
+    try {
+      const res = await axios.post("/_auth/_register", {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        password,
+        currency,
+      });
+      res.data && window.location.replace("/login");
+    } catch (error) {
+      setError(true);
+    }
+  };
   return (
     <div className="register-h">
       <div className="container-md">
@@ -24,97 +50,130 @@ export default function Register() {
         <p className="register">
           <b>register</b>
         </p>
-        <form class="row g-3">
-          <div class="col-md-5">
-            <label for="inputFirstName" class="form-label">
+        <form className="row g-3" onSubmit={handleSubmit} style={{left: "-2px", top: "0"}}>
+          <div className="col-md-6">
+            <label htmlFor="inputFirstName" className="form-label">
               First Name
             </label>
-            <input type="name" class="form-control" id="inputEmail4" />
-          </div>
-          <div class="col-md-5">
-            <label for="inputLastName" class="form-label">
-              Last Name
-            </label>
-            <input type="name" class="form-control" id="inputEmail4" />
-          </div>
-          <div class="col-md-5">
-            <label for="inputEmail4" class="form-label">
-              Email
-            </label>
-            <input type="email" class="form-control" id="inputEmail4" />
-          </div>
-          <div class="col-md-5">
-            <label for="inputNumber" class="form-label">
-              Phone Number
-            </label >
-            <PhoneInput class="form-control"
-              international
-              defaultCountry="NG"
-              value={value}
-              onChange={setValue}
+            <input
+              type="name"
+              className="form-control"
+              id="inputFirstName"
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div class="col-md-5">
-            <label for="inputPassword4" class="form-label">
+          <div className="col-md-6">
+            <label htmlFor="inputLastName" className="form-label">
+              Last Name
+            </label>
+            <input
+              type="name"
+              className="form-control"
+              id="inputLastName"
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="inputEmail4" className="form-label">
+              Email
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="inputEmail"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="inputFirstName" className="form-label">
+              Phone Number
+            </label>
+            <PhoneInput
+              className="form-control"
+              international
+              defaultCountry="NG"
+              // value={value}
+              // onChange={setValue}
+              value={phoneNumber}
+              onChange={setPhoneNumber}
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="validationCustom04" className="form-label">
+              Currency
+            </label>
+            <select
+              className="form-select"
+              id="validationCustom04"
+              required
+              onChange={(e) => setCurrency(e.target.value)}
+            >
+              <option defaultValue="choose">
+                Choose...
+              </option>
+              <option>AUD</option>
+              <option>CAD</option>
+              <option>GBP</option>
+              <option>GHC</option>
+              <option>JPY</option>
+              <option>NGN</option>
+              <option>USD</option>
+            </select>
+            <div className="invalid-feedback">
+              Please select a valid Currency.
+            </div>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="inputPassword4" className="form-label">
               Password
             </label>
             <input
               name="pwd"
               type={isRevealPwd ? "text" : "password"}
-              class="form-control"
+              className="form-control"
               id="inputPassword4"
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <img
               className="sp"
               title={isRevealPwd ? "Hide password" : "Show password"}
               src={isRevealPwd ? hidePwdImg : showPwdImg}
+              alt=""
+              style={{top: "-30px"}}
               onClick={() => setIsRevealPwd((prevState) => !prevState)}
             />
-            {/* <i className="eye far fa-eye"></i> */}
-          </div>
-          <div class="col-md-5">
-            <label for="inputPassword4" class="form-label">
-              Confirm Password
-            </label>
-            <input
-              name="pwd"
-              type={isRevealPwd ? "text" : "password"}
-              class="form-control"
-              id="inputPassword4"
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-            />
-            <img
-              className="sp"
-              title={isRevealPwd ? "Hide password" : "Show password"}
-              src={isRevealPwd ? hidePwdImg : showPwdImg}
-              onClick={() => setIsRevealPwd((prevState) => !prevState)}
-            />
-            {/* <i className="eye far fa-eye"></i> */}
           </div>
 
-          <div class="row-12">
-            <div class="form-check">
+          <div className="row-12">
+            <div className="form-check">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 id="gridCheck"
                 required
               />
-              <label class="form-check-label" for="gridCheck">
+              <label className="form-check-label" htmlFor="gridCheck">
                 You accept to our terms of service by checking this box
               </label>
             </div>
           </div>
-          <div class="col-12">
-            <button type="submit" class="btnn btn-primary">
+          <div className="col-md-6">
+            <button type="submit" className="btnn btn-primary">
               Sign in
             </button>
-            <div className="pub">Already a publisher! <span className="member-l"><a href="/login">Login</a></span></div>
+            <div className="pub">
+              Already a publisher!{" "}
+              <span className="member-l">
+                <Link to="/login">Login</Link>
+              </span>
+            </div>
           </div>
         </form>
+        {error && (
+          <span style={{ color: "red", textAlign: "center" }}>
+            Email already exit!
+          </span>
+        )}
       </div>
     </div>
   );

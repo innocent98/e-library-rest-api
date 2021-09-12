@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import showPwdImg from "./assets/showpd.svg";
 import hidePwdImg from "./assets/hidepd.svg";
 import "./login.css";
 import logo from "./assets/lg.png";
+import { Context } from "../../../context/Context";
+import axios from "axios";
+import { useContext, useRef } from "react";
 
 export default function Login() {
-    const [pwd, setPwd] = useState('');
-    const [isRevealPwd, setIsRevealPwd] = useState(false);
+  const userRef = useRef();
+  const passwordRef = useRef();
+  const { dispatch, isFetching } = useContext(Context);
+  const [error, setError] = useState("");
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(false);
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("_auth/login", {
+        email: userRef.current.value,
+        password: passwordRef.current.value,
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE" });
+      setError(true);
+    }
+  };
+
+  const [pwd, setPwd] = useState("");
+  const [isRevealPwd, setIsRevealPwd] = useState(false);
+
   return (
     <div className="head-l">
       <div className="container-md">
@@ -22,29 +48,63 @@ export default function Login() {
         <p className="login">
           <b>Login</b>
         </p>
-        <form class="row g-3">
-          <div class="row-md-6">
-            <label for="inputEmail4" class="form-label">
+        <form className="row g-3" onSubmit={handleSubmit} style={{left: "-4px", top: "-10px"}}>
+          <div className="row-md-6">
+            <label htmlFor="inputEmail4" className="form-label">
               Email
             </label>
-            <input type="email" class="form-control" id="inputEmail4" />
+            <input
+              type="email"
+              className="form-control"
+              id="inputEmail4"
+              ref={userRef}
+            />
           </div>
-          <div class="row-md-6">
-            <label for="inputPassword4" class="form-label">
+          <div className="row-md-6">
+            <label htmlFor="inputPassword4" className="form-label">
               Password
             </label>
-            <input name="pwd" type={isRevealPwd ? "text" : "password"} class="form-control" id="inputPassword4" value={pwd} onChange={e => setPwd(e.target.value)} />
-            <img className="l-sp" title={isRevealPwd ? "Hide password" : "Show password"} src={isRevealPwd ? hidePwdImg : showPwdImg} onClick={() => setIsRevealPwd(prevState => !prevState)} />
-            {/* <i className="eye far fa-eye"></i> */}
+            <input
+              name="pwd"
+              type={isRevealPwd ? "text" : "password"}
+              className="form-control"
+              id="inputPassword4"
+              value={pwd}
+              onChange={(e) => setPwd(e.target.value)}
+              ref={passwordRef}
+            />
+            <img
+              className="l-sp"
+              title={isRevealPwd ? "Hide password" : "Show password"}
+              src={isRevealPwd ? hidePwdImg : showPwdImg} alt=""
+              style={{top: "-30px"}}
+              onClick={() => setIsRevealPwd((prevState) => !prevState)}
+            />
           </div>
 
-          <div class="col-12">
-            <button type="submit" class="btn-n btn-primary">
-              Login in
+          <div className="col-12">
+            <button type="submit" className="login-button btn-primary" disabled={isFetching}>
+              Login
             </button>
-            <div className="member">Not a publisher? <span className="member-r"><a href="/register">Register</a></span></div>
+            <div className="member">
+              Not a publisher?{" "}
+              <span className="member-r">
+                <a href="/register">Register</a>
+              </span>
+            </div>
+            <div className="member">
+              {" "}
+              <span className="member-r">
+                <a href="/register">Forgot password?</a>
+              </span>
+            </div>
           </div>
         </form>
+        {error && (
+          <span style={{ color: "red", textAlign: "center", marginTop: "20px" }}>
+            Email and password is incorrect! Kindly check and try again
+          </span>
+        )}
       </div>
     </div>
   );

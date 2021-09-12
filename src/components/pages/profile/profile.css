@@ -32,7 +32,7 @@
 
 .heading-pr {
   background-color: #3D3C3A;
-  height: 130px;
+  height: 120px;
   border-bottom: 1px solid gray;
 }
 
@@ -46,16 +46,52 @@
   top: 5%;
 }
 
-.cover-pic-pr img {
+.rowC{
+  margin-top: -5px;
+}
+
+.cover-pic-pr .rowC > img {
   height: 100px;
   width: 100px;
-  border-radius: 100%;
+  border-radius: 50%;
   object-fit: cover;
+}
+
+.cover-pic-pr .prf > i {
+  background-color: #f5fffa;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  top: 20px;
+  left: -20px;
+  color: #000;
+}
+
+.profile-button {
+  position: relative;
+  bottom: 55px;
+  padding: 0px 25px;
+  border: none;
+  border-radius: 20px;
+  background-color: #2e8b57;
+  color: #ffff;
+  font-size: 1rem;
+}
+
+.profile-button:hover {
+  background-color: #306754;
+  transition: 1s ease-in;
 }
 
 .head-title{
     margin-left: 20px;
-    margin-top: 0;
+    margin-top: -15px;
     line-height: 1px;
     position: relative;
     justify-content: center;

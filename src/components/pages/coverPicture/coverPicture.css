@@ -1,0 +1,31 @@
+.cover-pic-u {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    margin-top: 10%;
+  }
+  
+  .cover-pic-u .row > img {
+    height: 300px;
+    width: 300px;
+    border-radius: 10%;
+    object-fit: cover;
+  }
+
+  .cover-pic-u .prf .i {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    bottom: 70px;
+    left: 0;
+    color: #000;
+  }

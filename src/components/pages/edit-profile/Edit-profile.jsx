@@ -1,14 +1,41 @@
-import React, { useState } from "react";
-import showPwdImg from "./assets/showpd.svg";
-import hidePwdImg from "./assets/hidepd.svg";
-import PhoneInput from "react-phone-number-input";
+import React, { useContext, useState } from "react";
 import "./edit-profile.css";
 import SideBar from "../../sidebar/SideBar";
+import { Context } from "../../../context/Context";
+import axios from "axios";
 
 export default function EditProfile() {
-  const [pwd, setPwd] = useState("");
-  const [isRevealPwd, setIsRevealPwd] = useState(false);
-  const [value, setValue] = useState();
+  const [address, setAddress] = useState("");
+  const [accountName, setAccountName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [country, setCountry] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const { user, dispatch } = useContext(Context);
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch({ type: "UPDATE_START" });
+    try {
+      const res = await axios.put("/publishers/" + user._id, {
+        publisherId: user._id,
+        address,
+        accountName,
+        accountNumber,
+        bankName,
+        country,
+      });
+      setSuccess(true);
+      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      window.location.reload();
+    } catch (error) {
+      dispatch({ type: "UPDATE_FAILURE" });
+    }
+  };
+
   return (
     <div className="profile-edit-h">
       <SideBar />
@@ -16,9 +43,9 @@ export default function EditProfile() {
         <div className="top-e">
           <p className="dashboard-e">
             Edit Profile
-            <i class="icon fas fa-bell">
+            <i className="icon fas fa-bell">
               <span className="position-absolute top-50 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
+                <span className="visually-hidden">New alerts</span>
               </span>
             </i>
           </p>
@@ -26,66 +53,68 @@ export default function EditProfile() {
       </div>
 
       <div className="cover-pic-e">
-        <img
-          src="https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=0hb44OrI"
-          alt=""
-        />
-        <label htmlFor="fileInput">
-          <span className="edit">
-            <i class="fas fa-pen"></i>
-          </span>
-        </label>
-        <input type="file" id="fileInput" style={{ display: "none" }} />
+        <img src={user.coverPicture ? PF + user.coverPicture : PF + "person/person3.png"} alt="" />
       </div>
-
       <div className="profile-wrapper">
-        <form className="row g-3">
+        <form className="row g-3" onSubmit={handleSubmit} style={{left: "-5px"}}>
           <div className="col-md-4">
-            <label for="inputFirstName" class="form-label">
-              First Name
-            </label>
-            <input class="form-control" type="text" placeholder="Jane" />
-          </div>
-          <div className="col-md-4">
-            <label for="inputFirstName" class="form-label">
-              Last Name
-            </label>
-            <input class="form-control" type="text" placeholder="Adams" />
-          </div>
-          <div className="col-md-4">
-            <label for="inputFirstName" class="form-label">
+            <label htmlFor="inputFirstName" className="form-label">
               Address
             </label>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
-              placeholder="1, Kingdom street"
+              placeholder={user.address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <div className="col-md-4">
-            <label for="inputAccount" class="form-label">
+            <label htmlFor="inputAccount" className="form-label">
               Account Name
             </label>
-            <input class="form-control" type="text" placeholder="Adams Jonah" />
+            <input
+              className="form-control"
+              type="text"
+              placeholder={user.accountName}
+              onChange={(e) => setAccountName(e.target.value)}
+            />
           </div>
           <div className="col-md-4">
-            <label for="inputAccount" class="form-label">
+            <label htmlFor="inputAccount" className="form-label">
               Account Number
             </label>
-            <input class="form-control" type="number" placeholder="112231..." />
+            <input
+              className="form-control"
+              type="number"
+              placeholder={user.accountNumber}
+              onChange={(e) => setAccountNumber(e.target.value)}
+            />
           </div>
           <div className="col-md-4">
-            <label for="inputAccount" class="form-label">
+            <label htmlFor="inputAccount" className="form-label">
               Bank Name
             </label>
-            <input class="form-control" type="text" placeholder="Chase" />
+            <input
+              className="form-control"
+              type="text"
+              placeholder={user.bankName}
+              onChange={(e) => setBankName(e.target.value)}
+            />
           </div>
 
           <div className="col-md-4">
-            <label for="country" class="form-lable">
+            <label htmlFor="country" className="form-lable">
               Country
             </label>
-            <select id="country" name="country" class="form-control">
+            <select
+              id="country"
+              name="country"
+              className="form-control"
+              onChange={(e) => setCountry(e.target.value)}
+            >
+              <option defaultValue="user.country" >
+                {user.country ? user.country : "choose..."}
+              </option>
               <option value="Afghanistan">Afghanistan</option>
               <option value="Åland Islands">Åland Islands</option>
               <option value="Albania">Albania</option>
@@ -387,39 +416,17 @@ export default function EditProfile() {
             </select>
           </div>
 
-          <div className="col-md-4">
-            <label for="inputFirstName" class="form-label">
-              Phone Number
-            </label>
-            <PhoneInput
-              class="form-control"
-              international
-              defaultCountry="NG"
-              value={value}
-              onChange={setValue}
-            />
-          </div>
-          <div className="col-md-4">
-            <label for="inputFirstName" class="form-label">
-              Password
-            </label>
-            <input
-              class="form-control"
-              name="pwd"
-              type={isRevealPwd ? "text" : "password"}
-              class="form-control"
-              id="inputPassword4"
-              value={pwd}
-              onChange={(e) => setPwd(e.target.value)}
-            />
-            <img
-              className="e-sp"
-              title={isRevealPwd ? "Hide password" : "Show password"}
-              src={isRevealPwd ? hidePwdImg : showPwdImg}
-              onClick={() => setIsRevealPwd((prevState) => !prevState)}
-            />
-          </div>
-          <button className="edit-profile-button">Update</button>
+          <button className="edit-profile-button" type="submit">
+            Update
+          </button>
+          {success && (
+            <span
+              className="profileSuccess"
+              style={{ color: "green", textAlign: "center" }}
+            >
+              Profile has been successfully updated!
+            </span>
+          )}
         </form>
       </div>
     </div>

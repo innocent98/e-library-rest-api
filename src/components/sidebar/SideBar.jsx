@@ -1,74 +1,76 @@
 import "./sidebar.css";
 import { slide as Menu } from "react-burger-menu";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
+import { Navbar } from "react-bootstrap";
 
 export default function SideBar() {
-  const user = true;
+  const { user, dispatch } = useContext(Context);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
+
   return (
     <div>
       <Menu>
-        <p className="publisher">Publisher Id: 60e9108fafc07d11f8318414</p>
+        <p className="publisher">Publisher Id: {user._id}</p>
         <br />
         <a className="menu-item" href="/dashboard">
-         <span class="side">Home</span> 
-          <i class="bi bi-house-door"></i>
+          <span className="side">Home</span>
+          <i className="bi bi-house-door"></i>
         </a>
         <br />
 
         <a className="menu-item" href="/upload">
-         <span class="side">Upload</span> 
-         <i class="bi bi-upload"></i>
+          <span className="side">Upload</span>
+          <i className="bi bi-upload"></i>
         </a>
         <br />
 
         <a className="menu-item" href="/profile">
-         <span class="side">Profile</span> 
-         <i class="bi bi-person-lines-fill"></i>
+          <span className="side">Profile</span>
+          <i className="bi bi-person-lines-fill"></i>
         </a>
         <br />
 
         <a className="menu-item" href="/payment">
-         <span class="side">Payment page</span> 
-         <i class="bi bi-wallet"></i>
+          <span className="side">Payment page</span>
+          <i className="bi bi-wallet"></i>
         </a>
         <br />
 
         <hr />
-        <div class="dropdown">
-          <butt
-            class="btn btn-secondary dropdown-toggle"
+        <div className="dropdown">
+          <Navbar
+            className="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownMenuButton1"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {
-              user ? (
-              <img
-                className="cover-pic"
-                src="https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2018-09/shutterstock_648907024.jpg?itok=0hb44OrI"
-                alt=""
-              />
-              ) : (
-                <>
-                </>
-              )
-            }
-           
-            <span className="user-name">Jane</span> 
-          </butt>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {user ? (
+              <img className="cover-pic" src={user.coverPicture ? PF+user.coverPicture : PF + "person/person3.png"} alt="" />
+            ) : (
+              <></>
+            )}
+
+            <span className="user-name">{user.firstName}</span>
+          </Navbar>
+          <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
-              <a class="dropdown-item" href="/profile">
+              <a className="dropdown-item" href="/profile">
                 Profile
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/settings">
+              <a className="dropdown-item" href="/settings">
                 settings
               </a>
             </li>
-            <li>
-            <a class="dropdown-item">{user && "Logout"}</a>
+            <li className="dropdown-item" onClick={handleLogout}>
+              {user && "Logout"}
             </li>
           </ul>
         </div>

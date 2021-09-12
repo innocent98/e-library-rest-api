@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.dash{
+    display: flex;
+    margin-left: 40px;
+    padding-left: 0;
+}
+
+.row-md{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.book > img{
+    height: 350px;
+    width: 250px;
+}

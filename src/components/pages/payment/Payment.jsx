@@ -1,7 +1,12 @@
 import "./payment.css";
 import SideBar from "../../sidebar/SideBar";
+import { Context } from "../../../context/Context";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 export default function Payment() {
+  const { user } = useContext(Context);
+
   return (
     <div className="payment-p">
       <SideBar />
@@ -9,9 +14,9 @@ export default function Payment() {
         <div className="top-p">
           <p className="dashboard-p">
             Payment
-            <i class="icon fas fa-bell">
+            <i className="icon fas fa-bell">
               <span className="position-absolute top-50 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
+                <span className="visually-hidden">New alerts</span>
               </span>
             </i>
           </p>
@@ -22,19 +27,26 @@ export default function Payment() {
           <h3>Your Account History</h3>
           Total balance
           <p className="balance">
-            <b>$2000</b>
+            <b>
+              {user.currency}
+              {user.totalBalance}
+            </b>
           </p>
         </div>
 
         <div className="available-balance">
-          Available balance
-          <p className="balance">
-            <b>$100</b>
-          </p>
-          <button class="withdraw">Withdraw</button>
+          <div className="balanceContainer">
+            Available balance: {user.currency}{user.availableBalance}
+            <p className="balance">
+              |
+            </p>
+            Total withdraw: {user.currency}{user.totalWithdraw}
+          </div>
+          <Link to="/withdraw">
+            <button className="withdraw">Withdraw</button>
+          </Link>
         </div>
       </div>
-      
     </div>
   );
 }
