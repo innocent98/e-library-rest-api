@@ -1,53 +1,33 @@
 {
-  "name": "react-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.21.1",
-    "bootstrap": "^5.0.2",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.0.0-beta.4",
-    "react-burger-menu": "^3.0.6",
-    "react-country-region-selector": "^3.1.0",
-    "react-dom": "^17.0.2",
-    "react-hook-form": "^7.12.0",
-    "react-phone-input-2": "^2.14.0",
-    "react-phone-number-input": "^3.1.25",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "timeago.js": "^4.0.2",
-    "use-location": "^0.0.1",
-    "web-vitals": "^1.1.2"
-  },
+  "name": "e-library-rest-api",
+  "version": "1.0.0",
+  "description": "rest api for e-library app",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "nodemon index.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innocent98/e-library-rest-api.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/innocent98/e-library-rest-api/issues"
   },
-  "proxy": "http://localhost:4000/"
+  "homepage": "https://github.com/innocent98/e-library-rest-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
